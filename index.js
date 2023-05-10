@@ -58,7 +58,7 @@ function saveUser() {
             } else {
                 userIsNew = false;
             }
-            document.getElementById('book-seat-message').innerHTML = "Hi " + currentUser.user_name + ", please proceed to book your seats.";
+            document.getElementById('book-seat-message').innerHTML = "Hi " + currentUser.user_name + ", please proceed to book your seats.</br>";
         } else {
             alert('Something unexpected occurred. Please try again.')
         };
@@ -81,8 +81,7 @@ function bookSeats() {
         lastBookedSeatNo = Number(seats[i].seat_number);
         i++;
     }
-    
-    
+        
     let noOfSeatsToBeBooked = Number(document.getElementById("no-of-seats").value);
     let seatNumbersToBeBooked = new Array();
 	for(let i=0; i<noOfSeatsToBeBooked; i++) {
@@ -106,6 +105,8 @@ function bookSeats() {
         };
         
         xhr.send(data);
+    } else {
+        alert("Please enter your email id before booking.");
     }
     
     //prevent page reload on submit
@@ -136,21 +137,21 @@ function getSeatsInfo() {
 }
 
 function resetAllData() {
-    //ajax call
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "reset-all-data.php");
     
-    xhr.onload = function() {
-        let res = JSON.parse(this.response);
-        if(res.status == 'success') {
-            getSeatsInfo();
-            alert('Deleted all users and previous booking data. Start new journey.')
-        } else {
-            alert('Something unexpected occurred. Please try again.');
-        }
-    };
-    
-    xhr.send();
+    if (confirm("This will delete all the users and their booking data.")) {
+        //ajax call
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "reset-all-data.php");
+        xhr.onload = function() {
+            let res = JSON.parse(this.response);
+            if(res.status == 'success') {
+                getSeatsInfo();
+            } else {
+                alert('Something unexpected occurred. Please try again.');
+            }
+        };
+        xhr.send();
+    }
     
     //prevent page reload on submit
     return false;
