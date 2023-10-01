@@ -5,4 +5,4 @@ A mini-project to dip my toes in waters of PHP.
 * Priority given to nearby seats.
 * Users can book as many tickets as they want until the coach is full.
 
-Link - https://topexample.000webhostapp.com/
+Link - https://topexample.000webhostapp.com/  (Preferably visit in incognito mode)
